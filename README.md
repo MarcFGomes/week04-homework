@@ -7,4 +7,6 @@ Features a progress bar timer, score tracking, and Bootstrap modal for results.
 
 Built with HTML, CSS (Bootstrap), and JavaScript.  
 
+BONUS: Questions are randomized
+
 [Play the game here](https://marcfgomes.github.io/week04-homework/)

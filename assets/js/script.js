@@ -29,6 +29,7 @@
   let i = 0;               // current question index
   let j=0;                  // random question number
   let questionsArray = []   //Array to know which questions came out;
+  let booleanArray = false  //boolean to check if j belongs in array;
   let score = 0;           // number of correct answers
   const total = questions.length;
   let timeLeft = 60;       // seconds remaining
@@ -58,8 +59,13 @@
   const restartBtn  = document.getElementById('restartBtn');
 
   //BONUS - Randomizing question number;
-  j = Math.floor(Math.random() * 9); //From 0 to 9
+  booleanArray = false; 
 
+    //Randomize first question
+    j = Math.floor(Math.random() * 9); //From 0 to 9
+    questionsArray.push(j);
+    //console.log(j);
+  
   // Initialize total in UI
   // TODO(1): set qTotal's text to total
   // qTotal.textContent = ???
@@ -102,8 +108,10 @@
       return;
     }
 
+
+
     // Render current question and choices
-    const q = questions[i];
+    const q = questions[j];
           
 
 
@@ -135,6 +143,30 @@
     const firstBtn = choices.querySelector('button');
         if (firstBtn) firstBtn.focus();
     }
+
+    //Randomize new question
+    booleanArray=false
+    console.log(questions.length);
+    
+    if (lastQuestionIndex !=-1) { //No need to randomize again the first question
+      if (i !== lastQuestionIndex ) {
+        //console.log(questionsArray.length);
+        
+        while (!booleanArray && questionsArray.length < questions.length ) {
+          j = Math.floor(Math.random() * questions.length); //From 0 to 9
+          
+          if (!questionsArray.includes(j)) {
+            booleanArray = true;
+            //console.log(j);
+            questionsArray.push(j);
+            //console.log(questionsArray);
+            console.log(questionsArray.length);
+            
+          }
+        }
+      }
+    }
+    
     lastQuestionIndex = i;
   }
 
@@ -217,7 +249,16 @@
     // i = ???; score = ???; timeLeft = ???;
     // render();
     // startTimer();
-    i = 0; score = 0; timeLeft = 60;
+    i = 0; score = 0; timeLeft = 60; 
+
+
+    console.clear()
+    booleanArray=false;
+    questionsArray =[];
+    j = Math.floor(Math.random() * 9); //From 0 to 9
+    questionsArray.push(j);
+    lastQuestionIndex = -1;
+
     resultModal.hide();
     render();
     startTimer();
